@@ -11,6 +11,7 @@ import { getRelativeLocaleUrl } from '@utils/url-utils';
 
 const currentLang = Astro.currentLocale || i18n!.defaultLocale;
 const t = i18nit(currentLang);
+const showLanguageSwitcher = (i18n?.locales?.length ?? 0) > 1;
 
 
 // 获取当前页面在不同语言下的路径
@@ -69,7 +70,7 @@ if (profileConfig.indexPage) {
             <Icon name="simple-icons:rss" class="w-4 h-4" />
         </a> -->
         <!-- Language Switcher -->
-        <div class="relative">
+        {showLanguageSwitcher && <div class="relative">
             <button id="language-button" class="flex items-center justify-center w-10 h-10 hover:bg-[var(--button-hover-color)] active:scale-90 rounded-lg hover:text-current border border-[var(--button-border-color)] transition-all duration-300" aria-label="Language Switcher">
                 <Icon name="fa6-solid:globe" class="w-4 h-4" />
             </button>
@@ -91,7 +92,7 @@ if (profileConfig.indexPage) {
                   </a>
               </div>
           </div>
-        </div>
+        </div>}
         <div class="relative md:hidden">
           <!-- Mobile Menu -->
           <button id="mobile-menu-button" class="flex items-center justify-center w-10 h-10 hover:bg-[var(--button-hover-color)] active:scale-90 rounded-lg hover:text-current border border-[var(--button-border-color)] transition-all duration-300" aria-label="Mobile Menu">

@@ -216,7 +216,7 @@ function initMobileNav() {
   if (!menuButton || !container) return;
 
   function openMenu() {
-    container.classList.remove('hidden');
+    container?.classList.remove('hidden');
     // 强制重绘以触发动画
     requestAnimationFrame(() => {
       overlay?.classList.add('opacity-100');
@@ -231,7 +231,7 @@ function initMobileNav() {
     
     // 等待动画结束后隐藏容器
     setTimeout(() => {
-      container.classList.add('hidden');
+      container?.classList.add('hidden');
       document.body.style.overflow = '';
     }, 300);
   }
@@ -286,11 +286,13 @@ function initLanguageMenu() {
   });
 
   document.addEventListener('click', (event) => {
+    const target = event.target;
     if (
+      target instanceof Node &&
       languageButton &&
       languageMenu &&
-      !languageButton.contains(event.target) &&
-      !languageMenu.contains(event.target)
+      !languageButton.contains(target) &&
+      !languageMenu.contains(target)
     ) {
       languageMenu.classList.add('hidden');
     }
@@ -314,16 +316,16 @@ document.addEventListener('astro:after-swap', initLanguageMenu);
 
       if (window.innerWidth < 776) {
         if (currentScrollY <= 50) {
-          header.classList.remove('header-hidden');
+          header?.classList.remove('header-hidden');
         } 
         else if (scrollDelta > 0 && currentScrollY > 100) {
-          header.classList.add('header-hidden');
+          header?.classList.add('header-hidden');
         } 
         else if (scrollDelta < 0) {
-          header.classList.remove('header-hidden');
+          header?.classList.remove('header-hidden');
         }
       } else {
-        header.classList.remove('header-hidden');
+        header?.classList.remove('header-hidden');
       }
       lastScrollY = currentScrollY;
       ticking = false;
